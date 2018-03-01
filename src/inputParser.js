@@ -10,7 +10,7 @@ const inputFiles = [
 
 const metaObj = (line) => {
   const vehicles = [];
-  for (let i=0, i<line[2], i++) {
+  for (let i=0; i<line[2]; i++) {
     vehicles.push({
       x:0,
       y:0,
@@ -23,18 +23,22 @@ const metaObj = (line) => {
     city:[line[0],line[1]],
     bonus: line[4],
     end: line[5],
+    routesCount: line[3],
     vehicles
   };
 }
 
 const rawFileToData = ( fileName ) => {
-  const rawData = fs.readFileSync('../input'+fileName);
+  const rawData = fs.readFileSync('../input/'+fileName, 'utf8');
   const arrData = rawData.split('\n').map(line =>
     line.split(' ')
   )
   const metaLine = arrData.shift();
-  const metaObj = metaObj(metaLine);
-  const routes = arrData.map(route => ({
+  const metaObject = metaObj(metaLine);
+  const routes = [];
+  for (let i = 0; i < metaObject.routesCount; i++) {
+    const route = arrData[i];
+    routes.push({
       start: {
         ...coordinate(route[0], route[1]),
         time: route[4],
@@ -46,15 +50,16 @@ const rawFileToData = ( fileName ) => {
       get distance() {
         return dist(this.start, this.finish);
       }
-  }))
-  return Object.assign({}, metaObj, routes);
+    })
+  }
+  return Object.assign({}, metaObject, {routes});
 }
 
 const readData = () => {
   return inputFiles.map(fileName => rawFileToData(fileName));
 }
 
-const coordinate (x, y) => {x, y};
+const coordinate = (x, y) => ({x, y});
 const dist = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 
 // {
