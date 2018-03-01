@@ -1,0 +1,19 @@
+{
+  "name": "self-driving-rides",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meta-coders/self-driving-rides.git"
+  },
+  "author": "dimanadko, o-rumiantsev, Kowalski0805, kuvichkamaksim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meta-coders/self-driving-rides/issues"
+  },
+  "homepage": "https://github.com/meta-coders/self-driving-rides#readme"
+}
