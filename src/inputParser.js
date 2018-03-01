@@ -1,11 +1,11 @@
 const fs = require("fs");
 
 const inputFiles = [
-  "a_example.in",
-  "b_should_be_easy.in",
-  "c_no_hurry.in",
-  "d_metropolis.in",
-  "e_high_bonus.in"
+  "a_example",
+  "b_should_be_easy",
+  "c_no_hurry",
+  "d_metropolis",
+  "e_high_bonus"
 ]
 
 const metaObj = (line) => {
@@ -29,7 +29,7 @@ const metaObj = (line) => {
 }
 
 const rawFileToData = ( fileName ) => {
-  const rawData = fs.readFileSync('../input/'+fileName, 'utf8');
+  const rawData = fs.readFileSync('../input/'+fileName+'.in', 'utf8');
   const arrData = rawData.split('\n').map(line =>
     line.split(' ')
   )
@@ -49,14 +49,27 @@ const rawFileToData = ( fileName ) => {
       },
       get distance() {
         return dist(this.start, this.finish);
-      }
+      },
+      i
     })
   }
-  return Object.assign({}, metaObject, {routes});
+  return Object.assign({}, metaObject, {routes}, {fileName});
 }
 
 const readData = () => {
   return inputFiles.map(fileName => rawFileToData(fileName));
+}
+
+const writeData = (cars, fileName) => {
+  const arrCars = cars.map(car => {
+    const obj = [car.routesToDrive.length];
+    for (const route in cars.routesToDrive) {
+      obj.push(route.i);
+    }
+    return obj.join(' ');
+  });
+  const fileCars = arrCars.join('\n');
+  fs.writeFileSync('../input/'+fileName+'.out');
 }
 
 const coordinate = (x, y) => ({x, y});
