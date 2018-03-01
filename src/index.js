@@ -4,7 +4,7 @@ const { readData, dist, writeData } = require('./inputParser');
 
 const arrData = readData();
 
-for (const data in arrData) {
+for (const data of arrData) {
   const cars = data.vehicles;
   const rides = data.routes;
 
@@ -31,5 +31,5 @@ for (const data in arrData) {
     }
   }
 
-  writeData(cars);
+  writeData(cars, data.fileName);
 }

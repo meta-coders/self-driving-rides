@@ -63,13 +63,14 @@ const readData = () => {
 const writeData = (cars, fileName) => {
   const arrCars = cars.map(car => {
     const obj = [car.routesToDrive.length];
-    for (const route in cars.routesToDrive) {
+    for (const route of car.routesToDrive) {
       obj.push(route.i);
     }
     return obj.join(' ');
   });
+  console.log(arrCars);
   const fileCars = arrCars.join('\n');
-  fs.writeFileSync('../input/'+fileName+'.out');
+  fs.writeFileSync('../input/'+fileName+'.out', fileCars);
 }
 
 const coordinate = (x, y) => ({x, y});
@@ -106,5 +107,6 @@ const dist = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 
 module.exports = {
   readData,
+  writeData,
   dist
 };
