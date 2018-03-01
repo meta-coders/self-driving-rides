@@ -47,7 +47,7 @@ const rawFileToData = ( fileName ) => {
         return dist(this.start, this.finish);
       }
   }))
-
+  return Object.assign({}, metaObj, routes);
 }
 
 const readData = () => {
